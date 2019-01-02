@@ -1,0 +1,71 @@
+//
+// Mixins
+// --------------------------------------------------
+
+// Normal Button Variants
+@mixin button-variant($bg-color) {
+  background-color: $bg-color;
+  &:hover {
+    background-color: darken($bg-color, 8%);
+  }
+  &.btn-floating:hover {
+    background-color: $bg-color;
+  }
+}
+
+// Ghost Button Variants
+@mixin ghost-button-variant($color, $border-color) {
+  background-color: transparent;
+  color: $color;
+  border-color: $border-color;
+  &:hover {
+    color: #fff;
+    background-color: $border-color;
+  }
+  &.btn-light {
+    color: #fff;
+    border-color: $border-color;
+    &:hover { color: #fff; }
+  }
+}
+
+// 3D Button Variants
+@mixin button-3d-variant($background-color) {
+  @include box-shadow(0px 3px 0px darken($background-color, 14%));
+  &:hover { background-color: darken($background-color, 5%) }
+  &:active {
+    @include box-shadow(0px 0px 0px darken($background-color, 14%));
+  }
+}
+
+// Placeholder text
+@mixin placeholder($color: $input-color-placeholder) {
+  // Firefox
+  &::-moz-placeholder {
+    color: $color;
+    opacity: 1;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  } // Internet Explorer 10+
+  &::-webkit-input-placeholder  {
+    color: $color;
+  } // Safari and Chrome
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Transparent gradient
+@mixin transparent-gradient($color) {
+  background: rgba($color,1);
+  background: -moz-linear-gradient(top, rgba($color,1) 0%, rgba($color,0.9) 78%, rgba($color,0.01) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba($color,1)), color-stop(78%, rgba($color,0.9)), color-stop(100%, rgba($color,0.01)));
+  background: -webkit-linear-gradient(top, rgba($color,1) 0%, rgba($color,0.9) 78%, rgba($color,0.01) 100%);
+  background: -o-linear-gradient(top, rgba($color,1) 0%, rgba($color,0.9) 78%, rgba($color,0.01) 100%);
+  background: -ms-linear-gradient(top, rgba($color,1) 0%, rgba($color,0.9) 78%, rgba($color,0.01) 100%);
+  background: linear-gradient(to bottom, rgba($color,1) 0%, rgba($color,0.9) 78%, rgba($color,0.01) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$color}', endColorstr='#{$color}', GradientType=0 );
+}

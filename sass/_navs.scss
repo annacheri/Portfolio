@@ -1,0 +1,152 @@
+//
+// Tabs + Filters
+// --------------------------------------------------
+
+.nav-tabs,
+.nav-filters {
+  display: block;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  border: none;
+  > li {
+    position: relative;
+    display: inline-block;
+    > a {
+      display: block;
+      color: $nav-tabs-link-color;
+      font-size: $nav-tabs-font-size;
+      text-transform: $nav-tabs-text-transform;
+      text-decoration: none;
+      letter-spacing: .1em;
+      padding: 10px 20px;
+      line-height: $line-height-base;
+      border-radius: 0;
+      opacity: .72;
+      @include user-select(none);
+      @include transition(all .3s);
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        outline: none;
+      }
+      &:hover {
+        color: $nav-tabs-link-color;
+        opacity: 1;
+      }
+    }
+
+    &:before, &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      width: 100%;
+      height: 2px;
+      background-color: $nav-tabs-border-color;
+      opacity: .12;
+      left: 0;
+      bottom: 0;
+    }
+    &:after {
+      opacity: 1;
+      width: 0;
+      @include transform(translateX(100%));
+      @include transition(all .3s);
+    }
+
+    // Active state, and its :hover to override normal :hover
+    &.active {
+      > a {
+        &,
+        &:hover {
+          color: $nav-tabs-link-color;
+          opacity: 1;
+          cursor: default;
+        }
+      }
+      &:after {
+        width: 100%;
+        @include transform(translateX(0));
+      }
+    }
+  }
+}
+.nav-filters {
+  > li:before,
+  > li:after {
+    background-color: $nav-filters-border-color;
+  }
+}
+
+// Tabbable tabs
+.tab-content {
+	padding: floor($line-height-computed * 1.5) 0 floor($line-height-computed / 1.5)  0;
+  > .tab-pane { display: none; }
+  > .active { display: block; }
+}
+
+// Light Skin
+.text-light {
+  .nav-tabs,
+  .nav-filters,
+  &.nav-tabs,
+  &.nav-filters {
+    > li {
+      > a { color: #fff; }
+      &.active {
+        > a {
+          &,
+          &:hover { color: #fff; }
+        }
+      }
+    }
+  }
+}
+
+// Component Animations
+.transition {
+  &.fade {
+  	opacity: 0;
+  	@include transition(all .4s ease-in-out);
+    @include backface-visibility(hidden);
+    &.in { opacity: 1; }
+  }
+  &.scale.fade {
+  	@include transform(scale(0.9));
+  }
+  &.scaledown.fade {
+  	@include transform(scale(1.1));
+  }
+  &.scale.fade.in,
+  &.scaledown.fade.in {
+  	@include transform(scale(1));
+  }
+  &.left.fade {
+  	@include transform(translateX(40px));
+  }
+  &.right.fade {
+  	@include transform(translateX(-40px));
+  }
+  &.left.fade.in,
+  &.right.fade.in {
+  	@include transform(translateX(0px));
+  }
+  &.top.fade {
+  	@include transform(translateY(-40px));
+  }
+  &.bottom.fade {
+  	@include transform(translateY(40px));
+  }
+  &.top.fade.in,
+  &.bottom.fade.in {
+  	@include transform(translateY(0px));
+  }
+  &.flip.fade {
+  	@include transform(rotateY(-90deg) scale(1.1));
+    @include transform-origin(50% 50%);
+  }
+  &.flip.fade.in {
+  	@include transform(rotateY(0deg) scale(1));
+    @include transform-origin(50% 50%);
+  }
+}

@@ -1,0 +1,204 @@
+//
+// Carousel
+// --------------------------------------------------
+
+/*
+ *  Owl Carousel - Auto Height Plugin
+ */
+.owl-height {
+  @include transition(height 400ms);
+}
+
+/*
+ *  Core Owl Carousel Styles
+ */
+.owl-carousel {
+  display: none;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* position relative and z-index fix webkit rendering fonts issue */
+  position: relative;
+  z-index: 1;
+  .owl-stage {
+    position: relative;
+    -ms-touch-action: pan-Y;
+    &:after {
+      content: ".";
+      display: block;
+      clear: both;
+      visibility: hidden;
+      line-height: 0;
+      height: 0;
+    }
+  }
+  .owl-stage-outer {
+    position: relative;
+    overflow: hidden;
+    /* fix for flashing background */
+    -webkit-transform: translate3d(0px, 0px, 0px);
+  }
+  .owl-controls {
+    position: relative;
+    width: 132px;
+    height: 36px;
+    margin-top: 20px;
+    &:before, &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      width: 6px;
+      height: 6px;
+      top: 50%;
+      margin-top: -3px;
+      border-radius: 50%;
+      background-color: $gray-dark;
+    }
+    &:before { left: 0; }
+    &:after { left: 24px; }
+    .owl-nav .owl-prev,
+    .owl-nav .owl-next {
+      cursor: pointer;
+      @include user-select(none);
+    }
+    .owl-nav {
+      position: relative;
+      width: 132px;
+      height: 36px;
+      &:before, &:after {
+        position: absolute;
+        display: block;
+        content: "";
+        width: 6px;
+        height: 6px;
+        top: 50%;
+        margin-top: -3px;
+        border-radius: 50%;
+        background-color: $gray-dark;
+      }
+      &:before { right: 0; }
+      &:after { right: 24px; }
+      .owl-prev, .owl-next {
+        position: absolute;
+        display: block;
+        width: 36px;
+        height: 36px;
+        line-height: 32px;
+        text-align: center;
+        font-size: 26px;
+        border: 2px solid $gray-dark;
+        border-radius: 50%;
+        left: 48px;
+        overflow: hidden;
+        cursor: pointer;
+        @include backface-visibility(hidden);
+        @include transition(opacity .3s);
+        &:before, &:after {
+          display: inline-block;
+          font-family: 'Material Icons';
+          content: "\e317";
+          color: $gray-dark;
+          @include transition(all .3s $ease-in-out-expo);
+        }
+        &:after {
+          position: absolute;
+          top: 0;
+          color: $brand-primary;
+        }
+      }
+      .owl-prev {
+        visibility: hidden;
+        opacity: 0;
+        &:before {
+          opacity: 1;
+          @include transform(translateX(0));
+        }
+        &:after {
+          left: 3px;
+          opacity: 0;
+          @include transform(translateX(100%));
+        }
+        &:hover {
+          &:before {
+            opacity: 0;
+            @include transform(translateX(-100%));
+          }
+          &:after {
+            opacity: 1;
+            @include transform(translateX(0));
+          }
+        }
+      }
+      .owl-next {
+        &:before {
+          opacity: 1;
+          @include transform(translateX(0) rotate(180deg));
+        }
+        &:after {
+          left: 3px;
+          opacity: 0;
+          @include transform(translateX(-100%) rotate(180deg));
+        }
+        &:hover {
+          &:before {
+            opacity: 0;
+            @include transform(translateX(100%)  rotate(180deg));
+          }
+          &:after {
+            opacity: 1;
+            @include transform(translateX(0)  rotate(180deg));
+          }
+        }
+      }
+      .owl-prev:before,
+      .owl-next:before { display: block; }
+    }
+  }
+  &.owl-loaded { display: block; }
+  &.owl-loading {
+    opacity: 0;
+    display: block;
+  }
+  &.owl-hidden { opacity: 0; }
+  .owl-refresh .owl-item { display: none; }
+  .owl-item {
+    position: relative;
+    min-height: 1px;
+    float: left;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    @include user-select(none);
+    img {
+      display: block;
+      margin: 0 auto;
+      -webkit-transform-style: preserve-3d;
+    }
+  }
+  &.owl-text-select-on .owl-item {
+    @include user-select(auto);
+  }
+  .owl-grab {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -o-grab;
+    cursor: -ms-grab;
+    cursor: grab;
+  }
+  &.owl-rtl {
+    direction: rtl;
+    .owl-item { float: right; }
+  }
+}
+
+/* No Js */
+.no-js .owl-carousel { display: block; }
+
+/*
+ *  Owl Carousel - Lazy Load Plugin
+ */
+.owl-carousel .owl-item .owl-lazy {
+  opacity: 0;
+  @include transition(opacity 400ms);
+}
+.owl-carousel .owl-item img {
+  transform-style: preserve-3d;
+}

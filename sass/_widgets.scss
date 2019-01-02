@@ -1,0 +1,211 @@
+//
+// Widgets (Sidebar)
+// --------------------------------------------------
+
+// Widget title
+.widget-title {
+	font-size: $widget-title-font-size;
+	color: $widget-title-color;
+	font-weight: normal;
+	margin-bottom: $line-height-computed;
+}
+
+// Base class
+.widget {
+	margin-bottom: $line-height-computed;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+// Custom Links Widget
+.widget_links {
+	> ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		> li {
+			padding: 3px 0;
+			> a {
+				font-size: $widget-title-font-size;
+				color: $gray-dark;
+				text-decoration: none;
+				padding: 3px 0;
+				@include transition(color .3s);
+				&:hover {
+					color: $gray-darker;
+				}
+			}
+		}
+	}
+}
+
+// Menu Widget
+.widget_menu {
+	ul {
+		list-style: none;
+		text-align: center;
+		padding: 0;
+		margin: 0;
+		> li > a {
+			display: inline-block;
+			font-size: $navi-link-font-size;
+			color: $navi-link-color;
+			text-transform: $navi-link-text-transform;
+			text-decoration: none;
+			border-bottom: 2px solid transparent;
+			padding: 10px 24px;
+			@include transition(color .3s);
+			&:hover {
+				color: $navi-link-active-color;
+			}
+		}
+		> .current-menu-item > a {
+			color: $navi-link-active-color;
+			border-bottom-color: $navi-link-active-border;
+		}
+	}
+}
+
+// Socials Widget
+.widget_socials {
+	.social-bar a {
+		font-size: floor(($font-size-base * 1.5)); // ~24px
+	}
+}
+
+
+// Instagram Widget
+.widget_instagram {
+	.insta-row {
+		display: table;
+		table-layout: fixed;
+		> .item {
+			display: table-cell;
+			vertical-align: top;
+			padding: 0 5px 5px 0;
+			> a {
+				display: block;
+				width: 100%;
+				border-radius: $border-radius-base;
+				overflow: hidden;
+				@include box-shadow(none);
+				@include transform(translateY(0) translateZ(0));
+			  @include user-select(none);
+				@include transition(all .3s ease-out);
+				&:hover {
+					@include box-shadow(0px 16px 25px 5px rgba(0,0,0,0.24));
+					@include transform(translateY(-4px));
+				}
+			}
+			&:last-child { padding-right: 0; }
+		}
+	}
+}
+
+// Copyright Widget
+.widget_copyright {
+	text-align: center;
+	.footer-logo {
+		display: block;
+		width: 100%;
+		margin: 0 auto floor($line-height-computed * 2);
+	}
+	.copyright-text {
+		font-size: $font-size-xs;
+		color: $gray-darker;
+		margin-bottom: 0;
+	}
+	.fa-heart {
+		font-size: 0.9em;
+		color: #f81c55;
+	}
+}
+
+// Search Widget
+.widget_search { margin-bottom: 0; }
+
+// Categories Widget
+.widget_categories {
+	.widget-title {
+		position: relative;
+		color: $gray-dark;
+		border-top: 1px solid $brand-primary;
+		border-bottom: 1px solid $brand-primary;
+		padding: 10px 0 10px 35px;
+		margin-bottom: floor($line-height-computed / 1.5);
+		&:before {
+			display: block;
+			position: absolute;
+			font-family: 'Material Icons';
+			content: "\e152";
+			top: 10px;
+			left: 12px;
+		}
+	}
+	> ul {
+		list-style: none;
+		padding: 0;
+		padding-left: 35px;
+		margin: 0;
+		> li {
+			padding: 2px 0;
+			> a {
+				font-size: $widget-title-font-size;
+				color: $gray-dark;
+				text-decoration: none;
+				padding: 3px 0;
+				@include transition(color .3s);
+				&:hover {
+					color: $gray-darker;
+				}
+			}
+		}
+	}
+}
+
+// Author Widget
+.widget_author {
+	display: table;
+	width: 100%;
+	background-color: $gray-lighter;
+	border-radius: $border-radius-base;
+	.author-ava,
+	.author-info {
+		display: table-cell;
+		vertical-align: top;
+	}
+	.author-ava {
+		width: $widget-author-ava-width;
+		padding-top: 17px;
+		> img { width: 100%; }
+	}
+	.author-info {
+		padding: 22px 20px;
+		.author-name {
+			font-size: $font-size-base;
+			font-weight: normal;
+			margin-bottom: 7px;
+		}
+		.author-position {
+			font-size: $font-size-small;
+			font-weight: normal;
+			color: $gray;
+			margin-bottom: 0;
+		}
+		p {
+			font-size: $font-size-small;
+			padding-top: floor($line-height-computed / 1.2);
+			margin-bottom: floor($line-height-computed / 1.2);
+		}
+		.social-bar a { margin-bottom: 0; }
+	}
+	@media screen and (max-width: 540px) {
+		.author-ava,
+		.author-info { display: block; }
+		.author-info {
+			width: 100%;
+			text-align: center;
+		}
+		.author-ava { margin: auto;}
+	}
+}

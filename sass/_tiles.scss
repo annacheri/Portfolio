@@ -1,0 +1,249 @@
+//
+// Tiles (Blog, Portfolio Tile, etc.)
+// --------------------------------------------------
+
+// Base class
+.tile {
+  width: 100%;
+  min-height: $tile-min-height;
+  padding: 42px;
+  margin-bottom: 30px;
+  background-color: $tile-bg;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .tile-subtitle {
+    font-size: $font-size-small;
+    color: $gray;
+    font-weight: normal;
+    margin-bottom: floor($line-height-computed / 2);
+  }
+  .tile-title {
+    font-size: $font-size-h2;
+    font-weight: 300;
+  }
+  &.tile-lg {
+    min-height: $tile-lg-min-height;
+  }
+  @media #{$tablet-port} {
+    min-height: floor($tile-min-height * .75);
+    &.tile-lg {
+      min-height: floor($tile-lg-min-height * .75);
+    }
+  }
+  @media #{$mobile-land} { padding: 25px; }
+}
+
+// Portfolio Tiles
+.portfolio-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 430px;
+  text-decoration: none;
+  border-radius: $border-radius-base;
+  margin-bottom: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .project-info {
+    position: absolute;
+    z-index: 2;
+    left: 25px;
+    bottom: 25px;
+    will-change: transform opacity;
+    opacity: 0;
+    @include transform(translateY(12px));
+    @include transition(all .35s);
+    .project-title {
+      font-size: $font-size-large;
+      font-weight: normal;
+      margin-bottom: floor($line-height-computed / 2.5);
+    }
+    .project-meta {
+      font-size: $font-size-small;
+      color: $gray;
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+    @media #{$tablet-port} {
+      opacity: 1;
+      @include transform(translateY(0));
+    }
+  }
+  .portfolio-badge {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    width: $portfolio-badge-size;
+    height: $portfolio-badge-size;
+    color: $brand-primary;
+    background-color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    top: 25px;
+    right: 25px;
+    will-change: transform opacity;
+
+    > i {
+      font-size: $portfolio-badge-icon-size;
+      line-height: $portfolio-badge-size;
+    }
+    &.badge-floating {
+      top: auto;
+      bottom: -17px;
+      opacity: 0;
+      @include box-shadow(0px 12px 18px 0px rgba(0, 0, 0, 0.26));
+      @include transform(scale(0.4));
+      @include transition(transform .35s $ease-in-out-back, opacity .3s);
+    }
+  }
+  &.text-light {
+    .project-title,
+    .project-meta { color: #fff; }
+    .project-meta { opacity: .75; }
+  }
+  &:hover {
+    .project-info {
+      opacity: 1;
+      @include transform(translateY(0));
+    }
+    .portfolio-badge.badge-floating {
+      opacity: 1;
+      @include transform(scale(1));
+    }
+  }
+}
+
+// Gallery Tile
+.gallery-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 430px;
+  text-decoration: none;
+  border-radius: $border-radius-base;
+  margin-bottom: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .gallery-badge {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    width: $portfolio-badge-size;
+    height: $portfolio-badge-size;
+    color: $brand-primary;
+    background-color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    top: 25px;
+    right: 25px;
+    will-change: transform opacity;
+    opacity: 0;
+    @include transform(scale(0.4));
+    @include transition(transform .35s $ease-in-out-back, opacity .3s);
+
+    > i {
+      font-size: $portfolio-badge-icon-size;
+      line-height: $portfolio-badge-size;
+    }
+  }
+  &:hover {
+    .gallery-badge {
+      opacity: 1;
+      @include transform(scale(1));
+    }
+  }
+}
+
+// Blog Tiles
+.blog-tile,
+.blog-post {
+  position: relative;
+  width: 100%;
+  max-width: $blog-tile-max-width;
+  background-color: $tile-bg;
+  border-radius: $border-radius-base;
+  margin: 0 auto 30px auto;
+  .featured-img {
+    display: block;
+    border-radius: $border-radius-base $border-radius-base 0 0;
+    overflow: hidden;
+    @include transform(translateZ(0));
+    @include user-select(none);
+  }
+  .blog-tile-title,
+  .blog-tile-title > a {
+    font-size: $blog-tile-title-size;
+    color: $blog-tile-title-color;
+    font-weight: normal;
+    line-height: $line-height-base;
+    text-decoration: none;
+    margin-bottom: floor($line-height-computed / 2);
+    @include transition(color .3s);
+    &:hover {
+      color: $blog-tile-title-hover-color;
+    }
+  }
+  .blog-tile-body {
+    padding: ($line-height-computed + 3) $line-height-computed $line-height-computed $line-height-computed;
+    p {
+      color: $gray;
+      font-size: $font-size-small;
+      margin-bottom: 0;
+    }
+  }
+  .blog-tile-footer {
+    border-top: 1px solid $gray-light;
+    padding: ($line-height-computed - 4) $line-height-computed $line-height-computed $line-height-computed;
+    .blog-meta {
+      margin-bottom: 0;
+      a, span { margin-right: 3px; }
+    }
+  }
+  .post-format {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    width: $portfolio-badge-size;
+    height: $portfolio-badge-size;
+    color: $brand-primary;
+    background-color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    right: 25px;
+    bottom: -17px;
+    will-change: transform opacity;
+    opacity: 0;
+    @include box-shadow(0px 12px 18px 0px rgba(0, 0, 0, 0.26));
+    @include transform(scale(0.4));
+    @include transition(transform .35s $ease-in-out-back, opacity .3s);
+
+    > i {
+      font-size: $portfolio-badge-icon-size;
+      line-height: $portfolio-badge-size;
+    }
+  }
+  &:hover {
+    .post-format {
+      opacity: 1;
+      @include transform(scale(1));
+    }
+  }
+}
+.blog-post {
+  display: block;
+  background-color: transparent;
+  border-radius: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+  @include transition(background-color .3s);
+  &:hover, &.active {
+    background-color: darken($sidebar-bg, 4%);
+  }
+  &.active {
+    pointer-events: none;
+    cursor: default;
+  }
+}
